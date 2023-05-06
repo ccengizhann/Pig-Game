@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject strawberry;
+    public float maxX;
+    public Transform spawnPoint;
+    public float spawnRate;
 
-    // Update is called once per frame
+
+    bool gameStarted = false;
+
+  
+    
+
+
     void Update()
     {
-        
+
+        if(Input.GetMouseButtonDown(0) && !gameStarted){
+            StartSpawning();
+            gameStarted = true;
+        }
+
+
     }
+
+    private void StartSpawning(){
+        InvokeRepeating("SpawnStrawberry", 0.5f, spawnRate);
+
+    }
+
+    private void SpawnStrawberry()
+    {
+        Vector3 spawnPos = spawnPoint.position;
+        spawnPos.x = Random.Range(-maxX,  maxX );
+
+        Instantiate(strawberry, spawnPos, Quaternion.identity);
+    }
+
+
+
+
+
+
 }
